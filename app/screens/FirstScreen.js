@@ -10,9 +10,10 @@ import { ScrollView } from 'react-native';
 import {District} from '../../Components/Districts';
 import Mandals from '../../Components/Mandals';
 import {Filters} from '../../Components/Filters';
-
+import fire from "../../Config/fire"
 import { Picker } from '@react-native-picker/picker'
 import { Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 
   
@@ -93,7 +94,11 @@ export default function FirstScreen() {
 
   return (
       
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <StatusBar
+ backgroundColor="#02223C"
+ barStyle="light-content"
+/>
       <View style={{backgroundColor:'#011627',position:'absolute',top:0, width:'100%', height:60,flexDirection:"row",alignItems:'center',paddingHorizontal:10,justifyContent:'space-between'}}>
           <Text style={{fontSize:25,color:'white',}}>Covid-19 Help Desk</Text>
           <TouchableOpacity
@@ -157,7 +162,7 @@ export default function FirstScreen() {
       <HospitalCard/>
       </ScrollView>
       
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     
-    marginTop:StatusBar.currentHeight,
+    
     backgroundColor:"#DAFFEF"
   },
   paragraph: {

@@ -1,5 +1,7 @@
 import React from 'react';
-import {Picker, Text, View} from 'react-native';
+import { Text, View} from 'react-native';
+import { Picker } from '@react-native-picker/picker'
+
 export const Filters = props => {
   const {filter, setFilter} = props;
   return (
