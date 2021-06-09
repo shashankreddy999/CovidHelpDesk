@@ -1,45 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Platform,Button, Text, View, StyleSheet, StatusBar, TouchableNativeFeedback } from 'react-native';
+import { Platform, Text, View, StyleSheet, StatusBar, TouchableNativeFeedback, Linking } from 'react-native';
 import { Avatar, Card, Title, Paragraph, Subheading } from 'react-native-paper';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import {Button} from 'react-native-elements'
 
 function HospitalCard(props) {
+  const { hospital } = props
     return (
-        <Card style={styles.card}>
+      <Card style={styles.card} >
       <View style={styles.cardview}>
         <View>
-        <Title>Hospital name</Title>
-        <Text style={{fontSize:14, fontWeight:'bold'}}>Area:</Text>
+        <Title>{hospital.name}</Title>
+            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Area : {hospital.mandal || hospital.area} , District : {hospital.district}</Text>
         </View>
         <View>
-        <Text style={{color:'green'}}>Vaccination Centre</Text>
-        <Text style={{color:'red', fontWeight:"bold"}}>Private Hospital</Text>
-        <Text style={{color:'green'}}>Government Hospital</Text>
-        </View>
+            { hospital.isVaccinationCenter ? <Text style={{color:'green'}}>Vaccination Centre</Text> : null}
+            {hospital.isPrivate ?
+              <Text style={{ color: 'red', fontWeight: "bold" }}>Private Hospital</Text> :
+              <Text style={{ color: 'green' }}>Government Hospital</Text>
+          }</View>
         
       </View>
       
     <Card.Content style={{paddingTop:15}}>
       <Text>
-         <Icon name="heart" type='evilicon'></Icon><Text>   Oxygen Available : {props.oxy}</Text>
+         <Icon name="heart" type='evilicon'></Icon><Text>   Oxygen Available : {hospital.oxygen.Available}</Text>
       </Text>
       <Text>
-        <Icon name="bed" type='material-community'></Icon><Text>   Beds Available : </Text>
+            <Icon name="bed" type='material-community'></Icon><Text>   Beds Available : { hospital.beds.available} </Text>
       </Text>
       <Text>
-        <Icon name="needle" type='material-community'></Icon><Text>  Vaccine Available : </Text>
+            <Icon name="needle" type='material-community'></Icon><Text>  Vaccine Available : { hospital.covaxin || hospital.covishield ? <Text>Available</Text> : <Text>Unavailable </Text> } </Text>
       </Text>
       <Text>
-        <Icon name="gas-cylinder" type='material-community'></Icon><Text>  Ventilator Available : </Text>
+        <Icon name="gas-cylinder" type='material-community'></Icon><Text>  Ventilator Available : {hospital.ventilators}</Text>
       </Text>
     </Card.Content>
     
     <Card.Actions>
     <View style={{justifyContent:'center'}}>
-    <Button title="Navigate"></Button>
+            <Button title='Navigate'  onPress={() => {
+              Linking.openURL(`https://www.google.com/maps/place/${hospital.location.latitude}+${hospital.location.longitude}`)
+            }}/>
     </View>  
-      
-      
     </Card.Actions>
   </Card>
     )
