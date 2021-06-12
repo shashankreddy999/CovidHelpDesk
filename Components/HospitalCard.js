@@ -11,7 +11,8 @@ function HospitalCard(props) {
       <View style={styles.cardview}>
         <View>
         <Title>{hospital.name}</Title>
-            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Area : {hospital.mandal || hospital.area} , District : {hospital.district}</Text>
+            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Area : {hospital.mandal || hospital.area}</Text>
+            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>District : {hospital.district}</Text>
         </View>
         <View>
             { hospital.isVaccinationCenter ? <Text style={{color:'green'}}>Vaccination Centre</Text> : null}
